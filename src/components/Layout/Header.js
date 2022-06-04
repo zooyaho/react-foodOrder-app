@@ -4,12 +4,13 @@ import React,{Fragment} from 'react';
 // 만약 서버에 있는 이미지면 "https://~~"로 src에 작성하면 됨.
 import mealsImage from '../../assets/meals.jpg';
 import classes from './Header.module.css'
+import HeaderCartButton from './HeaderCartButton';
 
 const Header = props => {
   return <Fragment>
     <header className={classes.header}>
       <h1>React Meals</h1>
-      <button>Cart</button>
+      <HeaderCartButton />
     </header>
     <div className={classes['main-image']}>
       <img src={mealsImage} alt="A table full of delicious food!"/>
