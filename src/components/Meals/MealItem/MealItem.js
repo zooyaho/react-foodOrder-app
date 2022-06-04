@@ -1,5 +1,6 @@
 import React from "react";
 import classes from "./MealItem.module.css";
+import MealItemForm from "./MealItemForm";
 
 const MealItem = (props) => {
   const price = `$${props.price.toFixed(2)}`;
@@ -11,7 +12,9 @@ const MealItem = (props) => {
         <div className={classes.description}>{props.description}</div>
         <div className={classes.price}>{price}</div>
       </div>
-      <div>{/* 사용자가 수량을 입력할 수 있는 폼(장바구니에 담고 싶은 음식의 수량)*/}</div>
+      <div>
+        <MealItemForm />
+      </div>
     </li>
   );
 };
