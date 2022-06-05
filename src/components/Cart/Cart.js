@@ -1,5 +1,6 @@
 /* 장바구니 모달창 컴포넌트 */
 import React from "react";
+import Modal from "../UI/Modal";
 import classes from "./Cart.module.css";
 
 const Cart = (props) => {
@@ -13,7 +14,7 @@ const Cart = (props) => {
   );
 
   return (
-    <div>
+    <Modal>
       {cartItems}
       <div className={classes.total}>
         {/* 총 수량 -> 하드코딩 해둠.*/}
@@ -25,7 +26,7 @@ const Cart = (props) => {
         <button className={classes["button--alt"]}>Close</button>
         <button className={classes.button}>Order</button>
       </div>
-    </div>
+    </Modal>
   );
 };
 
