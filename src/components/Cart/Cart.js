@@ -14,7 +14,7 @@ const Cart = (props) => {
   );
 
   return (
-    <Modal>
+    <Modal onClose={props.onClose}>
       {cartItems}
       <div className={classes.total}>
         {/* 총 수량 -> 하드코딩 해둠.*/}
@@ -23,7 +23,7 @@ const Cart = (props) => {
       </div>
       {/* 장바구니에 대한 action: 닫기 및 주문 버튼 */}
       <div className={classes.actions}>
-        <button className={classes["button--alt"]}>Close</button>
+        <button className={classes["button--alt"]} onClick={props.onClose}>Close</button>
         <button className={classes.button}>Order</button>
       </div>
     </Modal>
