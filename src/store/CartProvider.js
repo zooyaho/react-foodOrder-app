@@ -28,10 +28,33 @@ const cartReducer = (state, action) => {
       };
       updatedItems = [...state.items];
       updatedItems[existingCartItemIndex] = updatedItem;
-
     } else {
       // 새롭게 추가된 음식이면 state에 새롭게 추가.
       updatedItems = state.items.concat(action.item);
+    }
+
+    return { items: updatedItems, totalAmount: updatedTotalAmount };
+  }
+
+  if (action.type === "REMOVE_CART_ITEM") {
+    const existingCartItemIndex = state.items.findIndex(
+      (item) => item.id === action.id
+    );
+    const existingCartItem = state.items[existingCartItemIndex];
+    const updatedTotalAmount = state.totalAmount - existingCartItem.price;
+    let updatedItems;
+
+    if (existingCartItem.amount === 1) {
+      // 1개 남았을때 버튼을 누르면 해당 음식은 장바구니에서 삭제됨.
+      updatedItems = state.items.filter((item) => item.id !== action.id);
+    } else {
+      // 버튼 클릭 시 1개씩 개수 줄어짐.
+      const updatedItem = {
+        ...existingCartItem,
+        amount: existingCartItem.amount - 1,
+      };
+      updatedItems = [...state.items];
+      updatedItems[existingCartItemIndex] = updatedItem;
     }
 
     return { items: updatedItems, totalAmount: updatedTotalAmount };
