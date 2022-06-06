@@ -16,10 +16,8 @@ const cartReducer = (state, action) => {
     const existingCartItemIndex = state.items.findIndex(
       (item) => item.id === action.item.id
     );
-    console.log(`existingCartItemIndex: ${existingCartItemIndex}`);
     // 이미 카트에 추가된 음식인지, 없으면 null
     const existingCartItem = state.items[existingCartItemIndex];
-    console.log(`existingCartItem: ${existingCartItem}`);
     let updatedItems;
 
     if (existingCartItem) {
@@ -29,8 +27,8 @@ const cartReducer = (state, action) => {
         amount: existingCartItem.amount + action.item.amount,
       };
       updatedItems = [...state.items];
-      updatedItems[existingCartItem] = updatedItem;
-      console.log(updatedItems[existingCartItem]);
+      updatedItems[existingCartItemIndex] = updatedItem;
+
     } else {
       // 새롭게 추가된 음식이면 state에 새롭게 추가.
       updatedItems = state.items.concat(action.item);

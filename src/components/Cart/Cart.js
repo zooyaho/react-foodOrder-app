@@ -10,12 +10,15 @@ const Cart = (props) => {
 
   // 장바구니에서 항목을 추가하거나 삭제하는 함수
   const cartItemRemoveHandler = (id) => {};
-  const cartItemAddHandler = (item) => {};
+  const cartItemAddHandler = (item) => {
+    cartCtx.addItem(item);
+  };
 
   const cartItems = (
     <ul className={classes["cart-items"]}>
       {cartCtx.items.map((item) => (
         <CartItem
+          key={item.id}
           name={item.name}
           price={item.price}
           amount={item.amount}
