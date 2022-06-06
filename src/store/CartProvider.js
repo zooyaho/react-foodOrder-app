@@ -9,9 +9,33 @@ const defaultCartState = {
 // 컴포넌트가 재평가될 때마다 항상 재생성되어서는 안되기 때문에 컴포넌틑 밖에서 선언함!
 const cartReducer = (state, action) => {
   if (action.type === "ADD_CART_ITEM") {
-    const updatedItems = state.items.concat(action.item);
     const updatedTotalAmount =
       state.totalAmount + action.item.amount * action.item.price;
+
+    // 추가된 음식의 state.items의 index
+    const existingCartItemIndex = state.items.findIndex(
+      (item) => item.id === action.item.id
+    );
+    console.log(`existingCartItemIndex: ${existingCartItemIndex}`);
+    // 이미 카트에 추가된 음식인지, 없으면 null
+    const existingCartItem = state.items[existingCartItemIndex];
+    console.log(`existingCartItem: ${existingCartItem}`);
+    let updatedItems;
+
+    if (existingCartItem) {
+      // 이미 추가된 음식이면 원래있던 state에 해당 음식의 amount만 업데이트
+      const updatedItem = {
+        ...existingCartItem,
+        amount: existingCartItem.amount + action.item.amount,
+      };
+      updatedItems = [...state.items];
+      updatedItems[existingCartItem] = updatedItem;
+      console.log(updatedItems[existingCartItem]);
+    } else {
+      // 새롭게 추가된 음식이면 state에 새롭게 추가.
+      updatedItems = state.items.concat(action.item);
+    }
+
     return { items: updatedItems, totalAmount: updatedTotalAmount };
   }
 

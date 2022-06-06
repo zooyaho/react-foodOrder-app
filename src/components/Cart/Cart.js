@@ -19,8 +19,10 @@ const Cart = (props) => {
           name={item.name}
           price={item.price}
           amount={item.amount}
-          onRemove={cartItemRemoveHandler}
-          onAdd={cartItemAddHandler}
+          // 이렇게 하면 추가하거나 삭제된 항목의 id가 remove핸들러로 전달됨.
+          // bind는 향후 실행을 위해 함수를 사전에 구성함.-> 인수를 미리 구성할 수 있음.
+          onRemove={cartItemRemoveHandler.bind(null, item.id)}
+          onAdd={cartItemAddHandler.bind(null, item)}
         />
       ))}
     </ul>
